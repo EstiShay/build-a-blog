@@ -10,29 +10,15 @@
                 <input type="text" name='title' />
             </label>
         </p>
-        <p class="error">{{title_error}}</p>
+        <!--<p class="error">{{title_error}}</p>-->
         <p>
             <label>
                 Body: <br>
                 <textarea class="bodycontent" name='entry' rows=5 cols=80></textarea>
             </label>
         </p>
-        <p class="error">{{entry_error}}</p>
+        <!--<p class="error">{{entry_error}}</p>-->
         <input type="submit" value='Post it' />
     </form>
-
-    <hr />
-
-    {% if blogs|length == 0 %}
-    <p>No blogs yet</p>
-    {% else %}
-
-        {% for blog in blogs %}
-        <h2>{{blog.title}}</h2>
-        <p>{{blog.entry}}</p>
-        <hr>
-        {% endfor %}
-
-    {% endif %}
 
 {% endblock %}

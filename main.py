@@ -36,6 +36,37 @@ def blog():
     return render_template('blog.html',title="My Launch Code Blog", blogs=blogs)
 
 
+@app.route('/newpost', methods = ['POST', 'GET'])
+def newpost():
+
+    if request.method == 'POST':
+        title_name = request.form['title']
+        blog_entry = request.form['entry']
+        new_blog = Blog(title_name, blog_entry)
+        db.session.add(new_blog)
+        db.session.commit()
+
+
+    # completed_tasks = Task.query.filter_by(completed=True, owner=owner).all()
+    return render_template('newpost.html',title="My Launch Code Blog")
+
+@app.route('/blog', methods = ['POST'])
+def validate_form():
+
+    title_name = request.form['title']
+    blog_entry = request.form['entry']
+
+    title_error = ''
+    entry_error = ''
+
+    if not title_name:
+        title_error = "Please enter a title."
+
+    if not blog_entry:
+        entry_error = "Please enter some text."
+
+    if title_error or entry_error:
+        return render_template("blog.html", )
 
 if __name__ == '__main__':
     app.run()
