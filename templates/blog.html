@@ -28,7 +28,7 @@
     {% else %}
 
         {% for blog in blogs %}
-        <h2>{{blog.title}}</h2>
+        <h2><a href='/'>{{blog.title}}</a></h2>
         <p>{{blog.entry}}</p>
         <hr>
         {% endfor %}

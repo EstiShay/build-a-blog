@@ -46,8 +46,19 @@ def newpost():
         db.session.add(new_blog)
         db.session.commit()
 
+    title_error = ''
+    entry_error = ''
 
-    # completed_tasks = Task.query.filter_by(completed=True, owner=owner).all()
+    if not title_name:
+        title_error = "Please enter a title."
+
+    if not blog_entry:
+        entry_error = "Please enter some text."
+
+    if title_error or entry_error:
+        return render_template("blog.html", )
+
+
     return render_template('newpost.html',title="My Launch Code Blog")
 
 @app.route('/blog', methods = ['POST'])
@@ -65,8 +76,15 @@ def validate_form():
     if not blog_entry:
         entry_error = "Please enter some text."
 
-    if title_error or entry_error:
-        return render_template("blog.html", )
+#     if title_error or entry_error:
+#         return render_template("blog.html", )
+
+# @app.route('/post' methods=['POST'])
+# def show_post():
+#     # show the post with the given id, the id is an integer
+#     post_id = request.args.get()
+#     return render_template(
+
 
 if __name__ == '__main__':
     app.run()
