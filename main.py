@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+#Create the app; it's the app we run at the bottom of the page
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:doanglick@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
@@ -21,8 +22,10 @@ class Blog(db.Model):
         self.entry = entry
 
 
+#What to do at /blog when these methods used
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
+    #Handler, handles GET and POST requests at that url
 
     if request.method == 'POST':
         title_name = request.form['title']
@@ -30,6 +33,7 @@ def blog():
         new_blog = Blog(title_name, blog_entry)
         db.session.add(new_blog)
         db.session.commit()
+        return redirect('newpost.html')
 
     blogs = Blog.query.all()
     # completed_tasks = Task.query.filter_by(completed=True, owner=owner).all()
@@ -57,7 +61,6 @@ def newpost():
 
     if title_error or entry_error:
         return render_template("blog.html", )
-
 
     return render_template('newpost.html',title="My Launch Code Blog")
 
